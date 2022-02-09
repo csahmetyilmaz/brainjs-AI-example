@@ -1,23 +1,22 @@
-const brain = require('brain.js');
 // => Cf. https://github.com/BrainJS/brain.js
+//URL :   https://gist.githubusercontent.com/cbouvard/2f334a970cf543a507526bdca7d1cae4/raw/d535262ceea8fe71e4915b682ca01dc5e6d750f1/iris.csv
 
 //TODO INFO:  J'ai passé par le CSV en ligne
 // TODO INFO: TP3 Ahmet YILMAZ &&  Jonathan Lopez GOMEZ
-//URL :   https://gist.githubusercontent.com/cbouvard/2f334a970cf543a507526bdca7d1cae4/raw/d535262ceea8fe71e4915b682ca01dc5e6d750f1/iris.csv
- 
+//TODO INFO: https://github.com/csahmetyilmaz/brainjs-AI-example
 
+ 
+const brain = require('brain.js');
 const axios = require('axios');
-// => Cf. https://github.com/axios/axios/
 
 /**
  * Récupère les données CSV à partir d'un fichier local ou d'une URL (à choisir pour le TP)
- * @param urlOrFilename
+ * @param ressourceURL
  * @returns csvData
  */
-async function getCsvData(urlOrFilename) {
+async function getCsvData(ressourceURL) {
     // TODO
-   // return fetch('data.json',)
-   const response = await axios.get(urlOrFilename,{responseType:'blob'});
+   const response = await axios.get(ressourceURL,{responseType:'blob'});
    return response.data;
 }
 
@@ -31,6 +30,7 @@ async function parseCsv(csvData) {
     let tab = [];
     dataParsed.forEach(element => {
         let objet=element.split(',');
+        
         switch (objet[4]){
            case 'Setosa':
                objet[4] = [1,0,0];
@@ -42,6 +42,7 @@ async function parseCsv(csvData) {
                 objet[4] = [0,0,1];
                 break; 
         }
+
         tab.push({input: [parseFloat(objet[0]), parseFloat(objet[1]), parseFloat(objet[2]), parseFloat(objet[3])], output: objet[4]});
     });
     //log("tab", tab);
@@ -71,6 +72,12 @@ async function runningBrain(selectionnedData) {
     return this.net.run(selectionnedData);
 }
 
+function getRandomIntUntil150() {
+    return Math.floor(Math.random() * 150);
+  }
+
+
+
 /**
  * Fonction principale du script
  */
@@ -91,12 +98,19 @@ async function main() {
 
     // TODO : Tester avec le lancement de prédiction (fonction run)
     // Astuce : la fonction run renvoie un tableau typé. Pour obtenir un tableau classique, utiliser la fonction Array.from
-   let datas = await runningBrain(dataFormat[60].input);
+     
+    let randomSelection=getRandomIntUntil150();
+    console.log('ligne selectionné : '+ randomSelection);
+    //TODO INFO: y a un choix de ligne par random fonction. Pour selectionner manuel il faut changer randomSelection en dure.
+    let datas = await runningBrain(dataFormat[randomSelection].input);
+
     const resulTraining = Array.from(datas);
     let setosa = resulTraining[0];
     let versicolor = resulTraining[1];
     let virginica = resulTraining[2];
+
     let maxvalue = Math.max.apply(Math, resulTraining);
+
     switch (maxvalue){
         case setosa:
            console.log("L'iris selectionné correspond à : "+ setosa +" de la fleur Setosa");
