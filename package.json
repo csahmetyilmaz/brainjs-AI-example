@@ -1,0 +1,27 @@
+{
+  "name": "brainjs-ai-example",
+  "version": "1.0.0",
+  "description": "Ahmet YILMAZ - Jonathan Lopez GOMEZ project",
+  "main": "brain.js",
+  "scripts": {
+    "start": "nodemon brain.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csahmetyilmaz/brainjs-AI-example.git"
+  },
+  "keywords": [
+    "brainjs"
+  ],
+  "author": "Ahmet YILMAZ",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/csahmetyilmaz/brainjs-AI-example/issues"
+  },
+  "homepage": "https://github.com/csahmetyilmaz/brainjs-AI-example#readme",
+  "dependencies": {
+    "brain.js": "^2.0.0-beta.4",
+    "nodemon": "^2.0.15"
+  }
+}
