@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/csahmetyilmaz/brainjs-AI-example#readme",
   "dependencies": {
+    "axios": "^0.25.0",
     "brain.js": "^2.0.0-beta.4",
     "nodemon": "^2.0.15"
   }
